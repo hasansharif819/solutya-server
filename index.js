@@ -147,6 +147,20 @@ async function run() {
             res.send(result);
         });
 
+        //Create new user by Admin
+        app.post('/user', async (req, res) => {
+            const user = req.body;
+            const query = { email: user.email, name: user.name, password: user.password};
+            const exists = await userCollection.findOne(query);
+            if (exists) {
+                return res.send({ success: false, user: exists })
+            }
+            else {
+                const result = await userCollection.insertOne(item);
+                res.send({ success: true, result });
+            }
+        });
+
     }
     finally{}
 }
