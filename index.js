@@ -156,7 +156,7 @@ async function run() {
                 return res.send({ success: false, user: exists })
             }
             else {
-                const result = await userCollection.insertOne(item);
+                const result = await userCollection.insertOne(user);
                 res.send({ success: true, result });
             }
         });
